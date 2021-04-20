@@ -31,7 +31,7 @@ export function getUserDetail(id) {
 
 export function addUser(data) {
     return request({
-      url: '/user/',
+      url: '/user/add',
       method: 'post',
       data
     })

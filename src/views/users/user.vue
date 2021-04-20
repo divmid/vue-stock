@@ -21,6 +21,12 @@
               autocomplete="off"
             ></el-input>
           </el-form-item>
+          <el-form-item label="监控间隔" :label-width="formLabelWidth">
+            <el-input
+              v-model="form.polling_interval"
+              autocomplete="off"
+            ></el-input>
+          </el-form-item>
           <el-form-item label="钉钉token" :label-width="formLabelWidth">
             <el-input
               v-model="form.dingding_token"
@@ -44,6 +50,13 @@
       <el-table-column label="名称" width="180">
         <template slot-scope="scope">
           <span style="margin-left: 10px">{{ scope.row.username }}</span>
+        </template>
+      </el-table-column>
+      <el-table-column label="监控间隔" width="180">
+        <template slot-scope="scope">
+          <span style="margin-left: 10px"
+            >{{ scope.row.polling_interval }}秒</span
+          >
         </template>
       </el-table-column>
       <el-table-column label="钉钉token" width="180">
@@ -72,6 +85,12 @@
                   v-model="form.username"
                   autocomplete="off"
                   disabled
+                ></el-input>
+              </el-form-item>
+              <el-form-item label="监控间隔" :label-width="formLabelWidth">
+                <el-input
+                  v-model="form.polling_interval"
+                  autocomplete="off"
                 ></el-input>
               </el-form-item>
               <el-form-item label="钉钉token" :label-width="formLabelWidth">
@@ -107,7 +126,10 @@
                 ></el-input>
               </el-form-item>
               <el-form-item label="原密码" :label-width="formLabelWidth">
-                <el-input v-model="form.originPassword" autocomplete="off"></el-input>
+                <el-input
+                  v-model="form.originPassword"
+                  autocomplete="off"
+                ></el-input>
               </el-form-item>
               <el-form-item label="修改密码" :label-width="formLabelWidth">
                 <el-input v-model="form.password" autocomplete="off"></el-input>
@@ -133,7 +155,7 @@
             size="mini"
             type="danger"
             :style="{ display: show_button }"
-            @click="handleDelete(scope.row.id)"
+            @click="handleDeleteUser(scope.row.id)"
             >删除</el-button
           >
         </template>
@@ -174,6 +196,7 @@ export default {
         originPassword: "",
         confirmPassword: "",
         dingding_token: "",
+        polling_interval: 30,
       },
       formLabelWidth: "120px",
     };
@@ -182,8 +205,8 @@ export default {
     handleUserDetails(id, type) {
       getUserDetail(id).then((res) => {
         this.form = res;
-        if (type == "dingding"){
-            this.EditdingdingVisible = true;
+        if (type == "dingding") {
+          this.EditdingdingVisible = true;
         } else {
           this.EditUserFormVisible = true;
         }
@@ -205,7 +228,7 @@ export default {
     handleEditPassword() {
       console.log(this.form);
       changePassword(this.form).then((res) => {
-        if (res.code == 20000){
+        if (res.code == 20000) {
           getUserList().then((res) => {
             this.tableData = res;
             this.EditUserFormVisible = false;
@@ -215,8 +238,8 @@ export default {
               type: "success",
             });
           });
-        }else{
-           this.$message.error(res.message);
+        } else {
+          this.$message.error(res.message);
         }
       });
     },
@@ -236,15 +259,19 @@ export default {
     handleAddUser() {
       this.form.user = store.getters.user;
       addUser(this.form).then((res) => {
-        this.dialogFormVisible = false;
-        getUserList().then((res) => {
-          this.tableData = res;
-          this.$message({
-            showClose: true,
-            message: "保存成功",
-            type: "success",
+        if (res.code == 20000) {
+          this.dialogFormVisible = false;
+          getUserList().then((res) => {
+            this.tableData = res;
+            this.$message({
+              showClose: true,
+              message: "保存成功",
+              type: "success",
+            });
           });
-        });
+        } else {
+          this.$message.error(res.message);
+        }
       });
     },
     handleGetUserkList() {

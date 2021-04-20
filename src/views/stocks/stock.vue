@@ -18,14 +18,6 @@
           <el-form-item label="跌幅" :label-width="formLabelWidth">
             <el-input v-model="form.min_proportion" autocomplete="off"></el-input>
           </el-form-item>
-          <el-form-item label="监控间隔" :label-width="formLabelWidth">
-            <el-input v-model="form.polling_interval" autocomplete="off"></el-input>
-          </el-form-item>
-          <!-- <el-form-item label="用户" :label-width="formLabelWidth">
-            <el-select v-model="form.user_id" placeholder="Please select a zone">
-              <el-option label="乔赫" value=2></el-option>
-            </el-select>
-          </el-form-item> -->
         </el-form>
         <span slot="footer" class="dialog-footer">
           <el-button @click="dialogFormVisible = false">取消</el-button>
@@ -63,13 +55,6 @@
           <span style="margin-left: 10px">{{ scope.row.min_proportion }}%</span>
         </template>
       </el-table-column>
-      <el-table-column label="监控间隔" width="180">
-        <template slot-scope="scope">
-          <span style="margin-left: 10px">{{
-            scope.row.polling_interval
-          }}秒</span>
-        </template>
-      </el-table-column>
       <el-table-column label="时间" width="180">
         <template slot-scope="scope">
           <i class="el-icon-time"></i>
@@ -95,14 +80,6 @@
           <el-form-item label="跌幅" :label-width="formLabelWidth">
             <el-input v-model="form.min_proportion" autocomplete="off"></el-input>
           </el-form-item>
-          <el-form-item label="监控间隔" :label-width="formLabelWidth">
-            <el-input v-model="form.polling_interval" autocomplete="off"></el-input>
-          </el-form-item>
-          <!-- <el-form-item label="用户" :label-width="formLabelWidth">
-            <el-select v-model="form.user_id" placeholder="Please select a zone" disabled>
-              <el-option label="乔赫" value=2></el-option>
-            </el-select>
-          </el-form-item> -->
         </el-form>
         <span slot="footer" class="dialog-footer">
           <el-button @click="EditStockFormVisible = false">取消</el-button>
@@ -155,7 +132,6 @@ export default {
         stock_code: '',
         max_proportion: '',
         min_proportion: '',
-        polling_interval: 30,
         user: '',
       },
       formLabelWidth: '120px'
