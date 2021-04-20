@@ -76,7 +76,7 @@ export default {
       }
     };
     const validatePassword = (rule, value, callback) => {
-      if (value.length < 6) {
+      if (value.length < 0) {
         callback(new Error("请输入正确的密码"));
       } else {
         callback();
@@ -123,12 +123,9 @@ export default {
       this.$refs.loginForm.validate((valid) => {
         if (valid) {
           this.loading = true;
-          console.log("22222222222222222222");
           this.$store
             .dispatch("user/login", this.loginForm)
             .then((res) => {
-              console.log("11111111111111111111");
-              console.log(res);
               this.$router.push({ path: this.redirect || "/" });
               this.loading = false;
             })

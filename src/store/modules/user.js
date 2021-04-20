@@ -1,4 +1,4 @@
-import { login, logout, getInfo } from '@/api/user'
+import { login, logout } from '@/api/user'
 import { getToken, removeToken } from '@/utils/auth'
 // import { getToken, setToken, removeToken } from '@/utils/auth'
 import { resetRouter } from '@/router'
@@ -8,7 +8,12 @@ const getDefaultState = () => {
   return {
     token: getToken(),
     name: '',
-    avatar: ''
+    avatar: '',
+    is_superuser: false,
+    username: '',
+    user: '',
+    csrftoken: '',
+
   }
 }
 
@@ -23,6 +28,9 @@ const mutations = {
   },
   SET_NAME: (state, name) => {
     state.name = name
+  },
+  SET_IS_SUPERUSER: (state, is_superuser) => {
+    state.is_superuser = is_superuser
   },
   SET_USERNAME: (state, username) => {
     state.username = username
@@ -49,10 +57,8 @@ const actions = {
         commit('SET_CSRFTOKEN', Cookies.get("csrftoken"))
         commit('SET_USERNAME', response.username)
         commit('SET_USER', response.user)
+        commit('SET_IS_SUPERUSER', response.is_superuser)
         // setToken(Cookies.get("csrftoken"))
-        console.log('eeeeeeeeeeeeeee')
-        console.log(response)
-        console.log(state.user)
         resolve(response)
       }).catch(error => {
         reject(error)
@@ -60,26 +66,26 @@ const actions = {
     })
   },
 
-  // get user info
-  getInfo({ commit, state }) {
-    return new Promise((resolve, reject) => {
-      getInfo(state.token).then(response => {
-        const { data } = response
+  // // get user info
+  // getInfo({ commit, state }) {
+  //   return new Promise((resolve, reject) => {
+  //     getInfo(state.token).then(response => {
+  //       const { data } = response
 
-        if (!data) {
-          return reject('Verification failed, please Login again.')
-        }
+  //       if (!data) {
+  //         return reject('Verification failed, please Login again.')
+  //       }
 
-        const { name, avatar } = data
+  //       const { name, avatar } = data
 
-        commit('SET_NAME', name)
-        commit('SET_AVATAR', avatar)
-        resolve(data)
-      }).catch(error => {
-        reject(error)
-      })
-    })
-  },
+  //       commit('SET_NAME', name)
+  //       commit('SET_AVATAR', avatar)
+  //       resolve(data)
+  //     }).catch(error => {
+  //       reject(error)
+  //     })
+  //   })
+  // },
 
   // user logout
   logout({ commit, state }) {

@@ -55,23 +55,6 @@ export const constantRoutes = [
   //   }]
   // },
 
-  // {
-  //   path: '/user-manage',
-  //   component: Layout,
-  //   redirect: '/user-manage',
-  //   children: [{
-  //     path: 'user-manage',
-  //     name: '用户管理',
-  //     component: () => import('@/views/users/user_manage'),
-  //     meta: { title: '用户管理', icon: 'el-icon-user-solid' }
-  //   }, {
-  //     path: 'role',
-  //     name: '角色管理',
-  //     component: () => import('@/views/users/role'),
-  //     meta: { title: '角色管理', icon: 'el-icon-user-solid' }
-  //   }
-  //   ]
-  // },
 
   {
     path: '/',
@@ -85,6 +68,25 @@ export const constantRoutes = [
     }
     ]
   },
+  {
+    path: '/user',
+    component: Layout,
+    redirect: '/user',
+    children: [{
+      path: 'user',
+      name: '用户管理',
+      component: () => import('@/views/users/user'),
+      meta: { title: '用户管理', icon: 'el-icon-user-solid' }
+    }, 
+    // {
+    //   path: 'role',
+    //   name: '角色管理',
+    //   component: () => import('@/views/users/role'),
+    //   meta: { title: '角色管理', icon: 'el-icon-user-solid' }
+    // }
+    ]
+  },
+
 
   // {
   //   path: '/user-manage',
@@ -93,27 +95,27 @@ export const constantRoutes = [
   //   meta: { title: '用户管理', icon: 'el-icon-user-solid' }
   // },
 
-  {
-    path: '/example',
-    component: Layout,
-    redirect: '/example/table',
-    name: 'Example',
-    meta: { title: 'Example', icon: 'el-icon-s-help' },
-    children: [
-      {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
-        meta: { title: 'Table', icon: 'table' }
-      },
-      {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
-        meta: { title: 'Tree', icon: 'tree' }
-      }
-    ]
-  },
+  // {
+  //   path: '/example',
+  //   component: Layout,
+  //   redirect: '/example/table',
+  //   name: 'Example',
+  //   meta: { title: 'Example', icon: 'el-icon-s-help' },
+  //   children: [
+  //     {
+  //       path: 'table',
+  //       name: 'Table',
+  //       component: () => import('@/views/table/index'),
+  //       meta: { title: 'Table', icon: 'table' }
+  //     },
+  //     {
+  //       path: 'tree',
+  //       name: 'Tree',
+  //       component: () => import('@/views/tree/index'),
+  //       meta: { title: 'Tree', icon: 'tree' }
+  //     }
+  //   ]
+  // },
 
   { path: '*', redirect: '/404', hidden: true }
 ]

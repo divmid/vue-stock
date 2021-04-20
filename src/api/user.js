@@ -8,17 +8,54 @@ export function login(data) {
   })
 }
 
-export function getInfo(token) {
-  return request({
-    url: '/user/info',
-    method: 'get',
-  //   params: { token }
-  })
-}
-
 export function logout() {
   return request({
     url: '/logout',
     method: 'post'
+  })
+}
+
+export function getUserList() {
+  return request({
+    url: '/user/',
+    method: 'get',
+  })
+}
+export function getUserDetail(id) {
+  return request({
+    url: '/user/'+String(id)+'/',
+    method: 'get',
+  })
+}
+
+
+export function addUser(data) {
+    return request({
+      url: '/user/',
+      method: 'post',
+      data
+    })
+}
+
+export function putUser(id, data) {
+    return request({
+      url: '/user/'+String(id)+'/',
+      method: 'put',
+      data
+    })
+}
+
+export function deleteUser(id) {
+    return request({
+      url: '/user/'+ String(id)+'/',
+      method: 'delete',
+    })
+}
+
+export function changePassword(data) {
+  return request({
+    url: 'user/password',
+    method: 'post',
+    data
   })
 }

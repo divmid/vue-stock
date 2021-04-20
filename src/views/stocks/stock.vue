@@ -39,7 +39,7 @@
     <el-table :data="tableData" style="width: 100%">
       <el-table-column label="序号" width="180">
         <template slot-scope="scope">
-          <p>{{ scope.row.id }}</p>
+        <p> {{ scope.$index+1 }}</p>
         </template>
       </el-table-column>
       <el-table-column label="名称" width="180">
@@ -179,6 +179,11 @@ export default {
             {
               this.tableData = res
               this.EditStockFormVisible = false
+              this.$message({
+                showClose: true,
+                message: "保存成功",
+                type: 'success'
+              });
             }
           )
         }
@@ -191,6 +196,11 @@ export default {
             getStockList().then(res =>
               {
                 this.tableData = res
+                this.$message({
+                  showClose: true,
+                  message: "删除成功",
+                  type: 'success'
+                });
               }
             )
         }
@@ -205,15 +215,16 @@ export default {
           getStockList().then(res =>
             {
               this.tableData = res
+              this.$message({
+                showClose: true,
+                message: "保存成功",
+                type: 'success'
+              });
             }
           )
         }
       )
-      this.$message({
-        showClose: true,
-        message: "保存成功",
-        type: 'success'
-      });
+
 
     },
     handleGetStockList() {
