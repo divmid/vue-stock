@@ -1,6 +1,8 @@
 import { login, logout, getInfo } from '@/api/user'
-import { getToken, setToken, removeToken } from '@/utils/auth'
+import { getToken, removeToken } from '@/utils/auth'
+// import { getToken, setToken, removeToken } from '@/utils/auth'
 import { resetRouter } from '@/router'
+import Cookies from 'js-cookie'
 
 const getDefaultState = () => {
   return {
@@ -22,9 +24,18 @@ const mutations = {
   SET_NAME: (state, name) => {
     state.name = name
   },
+  SET_USERNAME: (state, username) => {
+    state.username = username
+  },
+  SET_USER: (state, user) => {
+    state.user = user
+  },
   SET_AVATAR: (state, avatar) => {
     state.avatar = avatar
-  }
+  },
+  SET_CSRFTOKEN: (state, csrftoken) => {
+    state.csrftoken = csrftoken
+  },
 }
 
 const actions = {
@@ -33,10 +44,16 @@ const actions = {
     const { username, password } = userInfo
     return new Promise((resolve, reject) => {
       login({ username: username.trim(), password: password }).then(response => {
-        const { data } = response
-        commit('SET_TOKEN', data.token)
-        setToken(data.token)
-        resolve()
+        // const { data } = response
+        commit('SET_TOKEN', response.access)
+        commit('SET_CSRFTOKEN', Cookies.get("csrftoken"))
+        commit('SET_USERNAME', response.username)
+        commit('SET_USER', response.user)
+        // setToken(Cookies.get("csrftoken"))
+        console.log('eeeeeeeeeeeeeee')
+        console.log(response)
+        console.log(state.user)
+        resolve(response)
       }).catch(error => {
         reject(error)
       })
