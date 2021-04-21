@@ -72,7 +72,7 @@
             <el-input v-model="form.name" autocomplete="off" disabled></el-input>
           </el-form-item>
           <el-form-item label="股票代码" :label-width="formLabelWidth">
-            <el-input v-model="form.stock_code" autocomplete="off" disabled></el-input>
+            <el-input v-model="form.stock_code" autocomplete="off" ></el-input>
           </el-form-item>
           <el-form-item label="涨幅" :label-width="formLabelWidth">
             <el-input v-model=" form.max_proportion" autocomplete="off"></el-input>
@@ -167,6 +167,7 @@ export default {
     },
     handleDelete(id) {
       console.log(id);
+      
       deleteStock(id).then(res =>
         {
             getStockList().then(res =>
