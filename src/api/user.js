@@ -17,13 +17,13 @@ export function logout() {
 
 export function getUserList() {
   return request({
-    url: '/user/',
+    url: '/api/v1/user/',
     method: 'get',
   })
 }
 export function getUserDetail(id) {
   return request({
-    url: '/user/'+String(id)+'/',
+    url: '/api/v1/user/'+String(id)+'/',
     method: 'get',
   })
 }
@@ -31,7 +31,7 @@ export function getUserDetail(id) {
 
 export function addUser(data) {
     return request({
-      url: '/user/add',
+      url: '/api/v1/user/add',
       method: 'post',
       data
     })
@@ -39,7 +39,7 @@ export function addUser(data) {
 
 export function putUser(id, data) {
     return request({
-      url: '/user/'+String(id)+'/',
+      url: '/api/v1/user/'+String(id)+'/',
       method: 'put',
       data
     })
@@ -47,14 +47,14 @@ export function putUser(id, data) {
 
 export function deleteUser(id) {
     return request({
-      url: '/user/'+ String(id)+'/',
+      url: '/api/v1/user/'+ String(id)+'/',
       method: 'delete',
     })
 }
 
 export function changePassword(data) {
   return request({
-    url: 'user/password',
+    url: '/api/v1/user/password',
     method: 'post',
     data
   })

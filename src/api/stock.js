@@ -2,13 +2,13 @@ import request from '@/utils/request'
 
 export function getStockList() {
   return request({
-    url: '/stock/',
+    url: '/api/v1/stock/',
     method: 'get',
   })
 }
 export function getStockDetail(id) {
   return request({
-    url: '/stock/'+String(id)+'/',
+    url: '/api/v1/stock/'+String(id)+'/',
     method: 'get',
   })
 }
@@ -16,7 +16,7 @@ export function getStockDetail(id) {
 
 export function addStock(data) {
     return request({
-      url: '/stock/',
+      url: '/api/v1/stock/',
       method: 'post',
       data
     })
@@ -24,7 +24,7 @@ export function addStock(data) {
 
 export function putStock(id, data) {
     return request({
-      url: '/stock/'+String(id)+'/',
+      url: '/api/v1/stock/'+String(id)+'/',
       method: 'put',
       data
     })
@@ -32,7 +32,7 @@ export function putStock(id, data) {
 
 export function deleteStock(id) {
     return request({
-      url: '/stock/'+ String(id)+'/',
+      url: '/api/v1/stock/'+ String(id)+'/',
       method: 'delete',
     })
 }
